@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2970 2100" width="2970" height="2100">
+  <!-- Background -->
+  <rect width="2970" height="2100" fill="#f8f9fb" stroke="#ccc" stroke-width="2"/>
+
+  <!-- Safe margin (200px = ~20mm at 10px/mm scale) -->
+  <rect x="200" y="200" width="2570" height="1700" fill="none" stroke="#0972d3" stroke-width="3" stroke-dasharray="20,10"/>
+
+  <!-- Dimensions label -->
+  <text x="1485" y="80" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="48" fill="#687078">
+    A4 Landscape - 297mm x 210mm (2480x1754px recomendado)
+  </text>
+
+  <!-- Title zone -->
+  <rect x="300" y="300" width="2370" height="200" fill="rgba(9,114,211,0.08)" stroke="#0972d3" stroke-width="2" rx="8"/>
+  <text x="1485" y="420" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="40" fill="#0972d3" font-weight="bold">
+    ZONA TITULO DEL CERTIFICADO
+  </text>
+
+  <!-- Body text zone -->
+  <rect x="400" y="560" width="2170" height="120" fill="rgba(9,114,211,0.05)" stroke="#0972d3" stroke-width="1" stroke-dasharray="8,4" rx="8"/>
+  <text x="1485" y="635" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="32" fill="#687078">
+    Texto introductorio
+  </text>
+
+  <!-- Participant name zone (largest) -->
+  <rect x="300" y="730" width="2370" height="250" fill="rgba(211,68,9,0.08)" stroke="#d34409" stroke-width="2" rx="8"/>
+  <text x="1485" y="880" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="56" fill="#d34409" font-weight="bold">
+    NOMBRE DEL PARTICIPANTE
+  </text>
+
+  <!-- Separator line -->
+  <line x1="800" y1="1020" x2="2170" y2="1020" stroke="#ccc" stroke-width="3"/>
+
+  <!-- Participation text zone -->
+  <rect x="400" y="1060" width="2170" height="120" fill="rgba(9,114,211,0.05)" stroke="#0972d3" stroke-width="1" stroke-dasharray="8,4" rx="8"/>
+  <text x="1485" y="1135" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="32" fill="#687078">
+    Texto de participacion
+  </text>
+
+  <!-- Event name zone -->
+  <rect x="300" y="1220" width="2370" height="150" fill="rgba(9,114,211,0.08)" stroke="#0972d3" stroke-width="2" rx="8"/>
+  <text x="1485" y="1315" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="40" fill="#0972d3" font-weight="bold">
+    NOMBRE DEL EVENTO
+  </text>
+
+  <!-- Details zone -->
+  <rect x="400" y="1410" width="2170" height="100" fill="rgba(9,114,211,0.05)" stroke="#0972d3" stroke-width="1" stroke-dasharray="8,4" rx="8"/>
+  <text x="1485" y="1475" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="28" fill="#687078">
+    Fechas y ubicacion
+  </text>
+
+  <!-- Signers zone -->
+  <rect x="200" y="1600" width="2570" height="300" fill="rgba(3,127,12,0.08)" stroke="#037f0c" stroke-width="2" rx="8"/>
+  <text x="1485" y="1710" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="36" fill="#037f0c" font-weight="bold">
+    ZONA DE FIRMANTES
+  </text>
+
+  <!-- Example signer slots -->
+  <line x1="500" y1="1780" x2="900" y2="1780" stroke="#555" stroke-width="2"/>
+  <text x="700" y="1820" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="24" fill="#555">Firmante 1</text>
+  <text x="700" y="1850" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="20" fill="#999">Cargo</text>
+
+  <line x1="1235" y1="1780" x2="1735" y2="1780" stroke="#555" stroke-width="2"/>
+  <text x="1485" y="1820" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="24" fill="#555">Firmante 2</text>
+  <text x="1485" y="1850" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="20" fill="#999">Cargo</text>
+
+  <line x1="2070" y1="1780" x2="2470" y2="1780" stroke="#555" stroke-width="2"/>
+  <text x="2270" y="1820" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="24" fill="#555">Firmante 3</text>
+  <text x="2270" y="1850" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="20" fill="#999">Cargo</text>
+
+  <!-- Legend -->
+  <rect x="200" y="1960" width="24" height="24" fill="rgba(9,114,211,0.08)" stroke="#0972d3" stroke-width="1"/>
+  <text x="235" y="1980" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="#333">Zona de texto (evitar elementos visuales importantes aqui)</text>
+
+  <rect x="1200" y="1960" width="24" height="24" fill="rgba(3,127,12,0.08)" stroke="#037f0c" stroke-width="1"/>
+  <text x="1235" y="1980" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="#333">Zona de firmantes</text>
+
+  <rect x="2000" y="1960" width="24" height="24" fill="rgba(211,68,9,0.08)" stroke="#d34409" stroke-width="1"/>
+  <text x="2035" y="1980" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="#333">Nombre participante</text>
+
+  <!-- Margin annotation -->
+  <text x="100" y="1050" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" font-size="24" fill="#0972d3" transform="rotate(-90, 100, 1050)">
+    Margen seguro 20mm
+  </text>
+</svg>

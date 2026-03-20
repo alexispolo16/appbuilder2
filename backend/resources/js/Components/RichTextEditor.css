@@ -1,0 +1,120 @@
+.rte-wrapper {
+    border: 1px solid #b6bec9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.rte-wrapper:focus-within {
+    border-color: #0972d3;
+    box-shadow: 0 0 0 1px #0972d3;
+}
+
+.rte-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px 8px;
+    border-bottom: 1px solid #e9ebed;
+    background: #fafafa;
+    flex-wrap: wrap;
+}
+
+.rte-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 6px;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    color: #414d5c;
+    line-height: 1;
+}
+
+.rte-btn:hover {
+    background: #e9ebed;
+}
+
+.rte-btn--active {
+    background: #0972d3;
+    color: #fff;
+}
+
+.rte-btn--active:hover {
+    background: #065299;
+}
+
+.rte-separator {
+    width: 1px;
+    height: 20px;
+    background: #d1d5db;
+    margin: 0 4px;
+}
+
+.rte-content {
+    min-height: 120px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.rte-content .tiptap {
+    padding: 8px 12px;
+    outline: none;
+    min-height: 120px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #000716;
+}
+
+.rte-content .tiptap p {
+    margin: 0 0 0.5em;
+}
+
+.rte-content .tiptap h2 {
+    font-size: 1.25em;
+    font-weight: 700;
+    margin: 0.75em 0 0.25em;
+}
+
+.rte-content .tiptap h3 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 0.5em 0 0.25em;
+}
+
+.rte-content .tiptap ul,
+.rte-content .tiptap ol {
+    padding-left: 1.5em;
+    margin: 0.25em 0;
+}
+
+.rte-content .tiptap a {
+    color: #0972d3;
+    text-decoration: underline;
+}
+
+.rte-content .tiptap hr {
+    border: none;
+    border-top: 1px solid #e9ebed;
+    margin: 0.75em 0;
+}
+
+.rte-content .tiptap blockquote {
+    border-left: 3px solid #d1d5db;
+    padding-left: 1em;
+    margin-left: 0;
+    color: #5f6b7a;
+}
+
+.rte-content .tiptap p.is-editor-empty:first-child::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+}
