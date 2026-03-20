@@ -1,0 +1,81 @@
+# AWS App Runner — Configuración de referencia
+# Para despliegue basado en imagen ECR (recomendado con este stack).
+# Este archivo documenta la configuración; aplícala en la consola/CLI de App Runner.
+#
+# Flujo recomendado:
+#   1. Construir imagen:  make ecr-build
+#   2. Subir a ECR:       make ecr-push
+#   3. Crear servicio:    make apprunner-create  (primera vez)
+#   4. Actualizar:        make apprunner-deploy  (despliegues siguientes)
+#
+# Variables de entorno requeridas en App Runner (configurar como secrets donde aplique):
+#   APP_KEY              (base64:... generado con `php artisan key:generate --show`)
+#   APP_URL              https://<tu-dominio-apprunner>
+#   DB_HOST              <RDS endpoint>
+#   DB_PORT              5432
+#   DB_DATABASE
+#   DB_USERNAME
+#   DB_PASSWORD          (secret)
+#   REDIS_HOST           <ElastiCache endpoint>
+#   REDIS_PASSWORD       (secret)
+#   REDIS_PORT           6379
+#   SESSION_DOMAIN       <tu-dominio-apprunner>
+#   FILESYSTEM_DISK      s3
+#   AWS_DEFAULT_REGION   us-west-2
+#   AWS_BUCKET           awsbuilderapp
+#   AWS_URL              https://awsbuilderapp.s3.us-west-2.amazonaws.com
+#   AWS_ACCESS_KEY_ID    OMITIR si usas IAM role del servicio App Runner (recomendado)
+#   AWS_SECRET_ACCESS_KEY OMITIR si usas IAM role del servicio App Runner (recomendado)
+#   REVERB_APP_ID
+#   REVERB_APP_KEY       (secret)
+#   REVERB_APP_SECRET    (secret)
+#   MAIL_HOST / MAIL_USERNAME / MAIL_PASSWORD / etc.
+
+service:
+  serviceName: builderapp
+
+  sourceConfiguration:
+    imageRepository:
+      imageIdentifier: <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/builderapp:latest
+      imageRepositoryType: ECR
+      imageConfiguration:
+        port: "8000"
+        runtimeEnvironmentVariables:
+          APP_ENV: production
+          APP_DEBUG: "false"
+          OCTANE_SERVER: frankenphp
+          LOG_CHANNEL: stderr
+          LOG_LEVEL: error
+          SESSION_DRIVER: redis
+          QUEUE_CONNECTION: redis
+          CACHE_STORE: redis
+          BROADCAST_CONNECTION: reverb
+          FILESYSTEM_DISK: s3
+          AWS_DEFAULT_REGION: us-west-2
+          AWS_BUCKET: awsbuilderapp
+          AWS_URL: https://awsbuilderapp.s3.us-west-2.amazonaws.com
+          # AWS_ACCESS_KEY_ID y AWS_SECRET_ACCESS_KEY se configuran como secrets,
+          # o se omiten si el servicio App Runner tiene un IAM role con acceso a S3
+          DB_CONNECTION: pgsql
+          DB_PORT: "5432"
+          REDIS_CLIENT: phpredis
+          REDIS_PORT: "6379"
+          REVERB_PORT: "8080"
+          REVERB_SCHEME: https
+    autoDeploymentsEnabled: false
+
+  instanceConfiguration:
+    cpu: "1 vCPU"
+    memory: "2 GB"
+
+  healthCheckConfiguration:
+    protocol: HTTP
+    path: /api/health
+    interval: 10
+    timeout: 5
+    healthyThreshold: 1
+    unhealthyThreshold: 3
+
+  networkConfiguration:
+    egressConfiguration:
+      egressType: VPC  # Necesario para RDS y ElastiCache en VPC privada

@@ -3,6 +3,9 @@
 use App\Http\Controllers\Api\V1\EventController;
 use Illuminate\Support\Facades\Route;
 
+// Health check para App Runner (sin throttle)
+Route::get('/health', fn () => response()->json(['status' => 'ok']));
+
 // API v1 routes (for mobile app)
 Route::prefix('v1')->middleware('throttle:60,1')->group(function () {
     Route::get('/health', fn () => response()->json(['status' => 'ok']));

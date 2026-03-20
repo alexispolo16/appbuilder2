@@ -64,6 +64,9 @@ RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions sto
     && chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
 
+# Supervisor log directory (requerido — falla sin esto)
+RUN mkdir -p /var/log/supervisor
+
 # Make FrankenPHP binary available for Octane
 RUN cp /usr/local/bin/frankenphp /app/frankenphp && chmod +x /app/frankenphp
 

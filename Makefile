@@ -1,4 +1,4 @@
-.PHONY: dev dev-stop fresh seed test docker-up docker-down prod-up prod-down prod-deploy prod-logs prod-fresh prod-ssl prod-shell
+.PHONY: dev dev-stop fresh seed test docker-up docker-down prod-up prod-down prod-deploy prod-logs prod-fresh prod-ssl prod-shell ecr-login ecr-build ecr-push apprunner-deploy
 
 # ===========================================
 # EventFlow SaaS - Development Commands
@@ -79,6 +79,30 @@ prod-ssl: ## Renew SSL certificate
 
 prod-shell: ## Open shell in app container
 	@docker compose -f docker-compose.prod.yml exec app bash
+
+# --- AWS App Runner ---
+# Requiere: AWS_ACCOUNT_ID, AWS_REGION, APPRUNNER_SERVICE_ARN como variables de entorno
+# Ejemplo: AWS_ACCOUNT_ID=123456789012 AWS_REGION=us-east-1 make ecr-push
+
+ECR_REPO ?= $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/builderapp
+IMAGE_TAG ?= latest
+
+ecr-login: ## Autenticarse en ECR
+	@aws ecr get-login-password --region $(AWS_REGION) | \
+	  docker login --username AWS --password-stdin $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
+
+ecr-build: ## Construir imagen de producción
+	@docker build -f docker/php/Dockerfile -t builderapp:$(IMAGE_TAG) .
+	@echo "Imagen construida: builderapp:$(IMAGE_TAG)"
+
+ecr-push: ecr-login ecr-build ## Construir y subir imagen a ECR
+	@docker tag builderapp:$(IMAGE_TAG) $(ECR_REPO):$(IMAGE_TAG)
+	@docker push $(ECR_REPO):$(IMAGE_TAG)
+	@echo "Imagen publicada: $(ECR_REPO):$(IMAGE_TAG)"
+
+apprunner-deploy: ecr-push ## Deploy completo a App Runner (build + push + actualizar servicio)
+	@aws apprunner start-deployment --service-arn $(APPRUNNER_SERVICE_ARN) --region $(AWS_REGION)
+	@echo "Deployment iniciado en App Runner."
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'

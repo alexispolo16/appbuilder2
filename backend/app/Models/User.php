@@ -61,7 +61,7 @@ class User extends Authenticatable implements MustVerifyEmail
             return null;
         }
 
-        return Storage::disk('s3')->url($this->photo_path);
+        return Storage::disk('public')->url($this->photo_path);
     }
 
     public function participants(): HasMany
